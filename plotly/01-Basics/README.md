@@ -2,7 +2,7 @@
 
 ## 目錄
 + [scatter](#scatter)
-+ line
++ [line](#line)
 + area
 + bar
 + funnel
@@ -115,3 +115,53 @@ fig.show()
 
 ## line
 
+### 基本用法
+```python
+import plotly.express as px
+import plotly.express as px
+
+df = px.data.gapminder().query("country=='Canada'")
+fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+fig.show()
+```
++ 類似scatter，但是會自動連接點
+
+![](../fig/01-007.png)
+
+
+### 進階用法：Sparkline
+```python
+import plotly.express as px
+df = px.data.stocks(indexed=True)
+fig = px.line(df, facet_row="company", facet_row_spacing=0.01, height=200, width=200)
+
+# hide and lock down axes
+fig.update_xaxes(visible=False, fixedrange=True)
+fig.update_yaxes(visible=False, fixedrange=True)
+
+# # remove facet/subplot labels
+fig.update_layout(annotations=[], overwrite=True)
+
+# # strip down the rest of the plot
+fig.update_layout(
+    showlegend=False,
+    plot_bgcolor="white",
+    margin=dict(t=10,l=10,b=10,r=10)
+)
+
+# disable the modebar for such a small plot
+fig.show(config=dict(displayModeBar=False))
+```
++ sparkline是一種用來顯示資料的趨勢的方式，把本來重疊在一起的線分開來，可以讓圖形更加清楚
+    + 但比較不適合用來顯示資料的數值或是比較線之間的大小
++ `facet_row="company"`：依照`company`欄位的不同，繪製不同的線
++ `facet_row_spacing=0.01`：線的尺度，越大越平滑、越小越精細
+    + ![facet_row_spacing](../fig/01-008.png)
++ `height=200, width=200`：圖形的尺寸
++ `fig.update_xaxes(visible=False, fixedrange=True)`：隱藏x軸，並且固定x軸的範圍
++ `fig.update_yaxes(visible=False, fixedrange=True)`：隱藏y軸，並且固定y軸的範圍
++ `fig.update_layout(annotations=[], overwrite=True)`：隱藏線的標籤
+    + ![annotations](../fig/01-009.png)
++ `fig.update_layout(showlegend=False, plot_bgcolor="white", margin=dict(t=10,l=10,b=10,r=10))`：隱藏圖例、背景顏色、邊界
+    + 如果沒有這行的話，則效果會是這樣：
+    + ![no_update_layout](../fig/01-010.png)
