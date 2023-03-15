@@ -78,6 +78,39 @@ print(scalar.device) # cpu
 ```
 
 ## 操控Tensor(Manipulating tensors)
+### 基本操作(Basic operations)
++ 加法(Addition)
+    + `torch.add(tensorA, tensorB)`
+    + `tensorA + tensorB`
++ 減法(Subtraction)
+    + `torch.sub(tensorA, tensorB)`
+    + `tensorA - tensorB`
++ 乘法(Multiplication)
+    + `torch.mul(tensorA, tensorB)`
+    + `tensorA * tensorB`
++ 除法(Division)
+    + `torch.div(tensorA, tensorB)`
+    + `tensorA / tensorB`
+
+### 矩陣運算(Matrix operations)
++ 轉置(Transpose)
+    + `torch.t(tensor)`
+    + `tensor.t()`
+    + `tensor.T`
++ 矩陣乘法有多種不同的類型
+    + 逐元素相乘(Element-wise Multipulation)
+        + `torch.mul(tensorA, tensorB)`
+        + `tensorA * tensorB`
+        + 兩個矩陣維度必須相同，輸出為相同維度的矩陣
+    + 矩陣乘法(Matrix Multipulation)
+        + `torch.matmul(tensorA, tensorB)`
+        + 等價於`tensorA @ tensorB`
+            + 只有兩維時候可以簡化成：`torch.mm(tensorM, tensorN)`
+        + 若為$M_{a,b}, N_{b,c}$相乘，會得到$R_{a,c}$
+        + > Shape Error是做tensor計算時候最常出現的錯誤
+    + 批量矩陣乘法(Batch Matrix Multipulation)
+        + `torch.bmm(tensorA, tensorB)`
+        + 若為$M_{b,m,n}, N_{b,n,p}$相乘，會得到$R_{b,m,p}$
 
 ## Tensor的形狀(Dealing with tensor shapes)
 
