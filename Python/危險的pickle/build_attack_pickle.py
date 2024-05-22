@@ -14,5 +14,5 @@ class Attack:
     
 d = Attack()
 
-with open('attack.pickle', 'wb') as f:
+with open('data.pickle', 'wb') as f:
     pickle.dump(d, f)
